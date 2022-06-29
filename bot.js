@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const commandLoader = require('./commandLoader');
 
 const TOKEN = process.env.TOKEN;
-/*
+
 const mysql = require('mysql');
 const connection = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
-*/
+
 
 
 const bot = new Discord.Client({
