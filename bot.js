@@ -1,10 +1,15 @@
 const Discord = require('discord.js');
 
-const TOKEN = 'OTkxNjA2NzI1NTcwNDY1ODIy.G6wiMA.VLmkixkZw1N2v_ILEqAtj4TfbuKQNl9pcOfulM';
+const TOKEN = '';
 
 const bot = new Discord.Client({
     intents: ['GUILD_MESSAGES', 'GUILDS']
 });
+
+
+bot.on('messageCreate', (message) => {
+    console.log(message.content)
+})
 
 bot.login(TOKEN)
     .then(() => {
