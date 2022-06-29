@@ -1,49 +1,33 @@
 const Discord = require('discord.js');
+const commandLoader = require('./commandLoader');
 
 const TOKEN = '';
+
 
 const bot = new Discord.Client({
     intents: ['GUILD_MESSAGES', 'GUILDS', 'GUILD_MEMBERS']
 });
 
-/*
+commandLoader.load(bot);
+
+const PREFIX = '$';
 bot.on('messageCreate', async (message) => {
-    // bot reply to every ping message
-    if (message.content === 'ping'){
-        await   message.channel.send('pong');
-    }
-    //the bot will reply to any message
-    if(message.author.bot === false){
-        message.reply('salut !');
-    }
     
+
+    if (message.content.startsWith(PREFIX)){
+        let words = message.content.split(' ');
+        const commandName= words.shift().slice(1);
+        const arguments = words;
+
+        if(bot.commands.has(commandName)) {
+            bot.commands.get(commandName).run(bot, message, arguments);
+        } else{
+            await message.delete
+            await message.channel.send('The ${commandName} does not exist');
+        }
+
+    }
 })
-*/
-
-
-bot.on("guildMemberAdd", (member) => {
-    member.guild.roles.create({
-        data: {
-        name: 'My Friend',
-        color: 'BLUE',
-        },
-        reason: 'welcome my friend',
-    })
-        .then(role => {
-            member.roles.add(role);
-        })
-        .catch(console.error);
-});
-
-/*
-bot.on('messageCreate', async (message) => {
-    let member = message.mentions.members.first();
-
-    let role = message.guild.roles.cache.find(r => r.name === "Hello");
-    member.roles.add(role).catch(console.error);
-})
-
-*/
 
 bot.login(TOKEN)
     .then(() => {
