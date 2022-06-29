@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 const commandLoader = require('./commandLoader');
 const mysql = require('./MysqlConnector');
 
+const xp = require('./xp');
+
 mysql.connect();
 
 const TOKEN = process.env.TOKEN;
@@ -15,7 +17,7 @@ commandLoader.load(bot);
 
 const PREFIX = '$';
 bot.on('messageCreate', async (message) => {
-    
+    xp(message);    
 
     if (message.content.startsWith(PREFIX)){
         let words = message.content.split(' ');
