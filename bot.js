@@ -1,20 +1,11 @@
 require('dotenv').config();
 const Discord = require('discord.js');
 const commandLoader = require('./commandLoader');
+const mysql = require('./MysqlConnector');
+
+mysql.connect();
 
 const TOKEN = process.env.TOKEN;
-
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user:  process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_NAME, 
-});
-
-connection.connect();
-
-
 
 const bot = new Discord.Client({
     intents: ['GUILD_MESSAGES', 'GUILDS', 'GUILD_MEMBERS']
