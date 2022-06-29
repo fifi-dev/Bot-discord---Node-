@@ -7,8 +7,16 @@ const bot = new Discord.Client({
 });
 
 
-bot.on('messageCreate', (message) => {
-    console.log(message.content)
+bot.on('messageCreate', async (message) => {
+    // bot reply to every ping message
+    if (message.content === 'ping'){
+        await   message.channel.send('pong');
+    }
+    //the bot will reply to any message
+    if(message.author.bot === false){
+        message.reply('salut !');
+    }
+    
 })
 
 bot.login(TOKEN)
